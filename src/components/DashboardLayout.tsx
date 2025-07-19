@@ -9,7 +9,7 @@ import { useAuth } from '../hooks/useAuth';
 import {
   Dashboard as DashboardIcon,
   Settings as SettingsIcon,
-  Architecture as FloorplansIcon,
+  Map as FloorplansIcon,
 } from '@mui/icons-material';
 
 // Navigation configuration
