@@ -8,10 +8,10 @@ import {
   Typography,
 } from '@mui/material';
 import {
-  Tv as FrontIcon,
-  SettingsBackupRestore as RearIcon,
-  AspectRatio as WideIcon,
-  Lightbulb as LEDIcon,
+  Monitor as FrontIcon,
+  Videocam as RearIcon,
+  Crop169 as WideIcon,
+  GridOn as LEDIcon,
 } from '@mui/icons-material';
 import {
   FullSeatingIcon,
@@ -46,8 +46,8 @@ const AttendeesForm = ({ formData, onFormChange }: AttendeesFormProps) => {
         placeholder="150"
         value={formData.attendees}
         onChange={(e) => handleChange('attendees', e.target.value)}
-        fullWidth
         type="number"
+        sx={{ maxWidth: 200 }}
       />
 
       <Box>
