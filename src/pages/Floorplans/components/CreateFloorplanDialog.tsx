@@ -129,7 +129,13 @@ const CreateFloorplanDialog = ({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="xs"
+      fullWidth
+      sx={{ '& .MuiDialog-paper': { maxWidth: '500px' } }}
+    >
       <DialogTitle>Create New Floorplan</DialogTitle>
       <DialogContent>
         <Box sx={{ mt: 2 }}>
