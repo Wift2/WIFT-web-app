@@ -7,14 +7,14 @@ import {
   CardContent,
   Grid,
   Fade,
-  Zoom,
+  Skeleton,
 } from '@mui/material';
 import {
   Add as AddIcon,
   Edit as EditIcon,
   Visibility as ViewIcon,
 } from '@mui/icons-material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Router } from '@toolpad/core';
 import CreateFloorplanDialog from './components/CreateFloorplanDialog';
 
@@ -26,6 +26,15 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [animatingCard, setAnimatingCard] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time for skeleton
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleCreateNew = () => {
     setAnimatingCard(true);
@@ -75,104 +84,245 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
               {/* Welcome Card */}
               <Paper sx={{ p: 3 }}>
-                <Typography variant="h6" gutterBottom>
-                  Welcome to WIFT Floorplan Creator
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  Design and create custom floorplans with our intuitive
-                  drag-and-drop interface. Build detailed layouts for
-                  residential and commercial properties with precision tools and
-                  professional templates.
-                </Typography>
+                {loading ? (
+                  <>
+                    <Skeleton
+                      variant="text"
+                      sx={{ fontSize: '1.25rem', mb: 1 }}
+                      width="40%"
+                    />
+                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                    <Skeleton
+                      variant="text"
+                      sx={{ fontSize: '1rem' }}
+                      width="80%"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Typography variant="h6" gutterBottom>
+                      Welcome to WIFT Floorplan Creator
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      Design and create custom floorplans with our intuitive
+                      drag-and-drop interface. Build detailed layouts for
+                      residential and commercial properties with precision tools
+                      and professional templates.
+                    </Typography>
+                  </>
+                )}
               </Paper>
 
               {/* Quick Actions */}
               <Grid container spacing={3}>
                 <Grid size={{ xs: 12, md: 4 }}>
-                  <Zoom in={!animatingCard} timeout={300}>
-                    <Card
-                      sx={{
-                        height: '100%',
-                        cursor: 'pointer',
-                        transform: animatingCard ? 'scale(1.2)' : 'scale(1)',
-                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                        zIndex: animatingCard ? 10 : 1,
-                        '&:hover': {
-                          boxShadow: 4,
-                          transform: animatingCard
-                            ? 'scale(1.2)'
+                  <Card
+                    sx={{
+                      height: '100%',
+                      cursor: loading ? 'default' : 'pointer',
+                      transform: animatingCard ? 'scale(1.2)' : 'scale(1)',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      zIndex: animatingCard ? 10 : 1,
+                      '&:hover': {
+                        boxShadow: loading ? 0 : 4,
+                        transform: animatingCard
+                          ? 'scale(1.2)'
+                          : loading
+                            ? 'scale(1)'
                             : 'scale(1.02)',
-                        },
-                      }}
-                      onClick={handleCreateNew}
-                    >
-                      <CardContent sx={{ textAlign: 'center', p: 3 }}>
-                        <AddIcon
-                          sx={{ fontSize: 48, color: 'primary.main', mb: 2 }}
-                        />
-                        <Typography variant="h6" gutterBottom>
-                          Create New Floorplan
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          sx={{ mb: 2 }}
-                        >
-                          Start from scratch or use our professional templates
-                          to design your custom floorplan.
-                        </Typography>
-                        <Button variant="outlined" fullWidth>
-                          Get Started
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </Zoom>
-                </Grid>
-
-                <Grid size={{ xs: 12, md: 4 }}>
-                  <Card sx={{ height: '100%' }}>
+                      },
+                    }}
+                    onClick={loading ? undefined : handleCreateNew}
+                  >
                     <CardContent sx={{ textAlign: 'center', p: 3 }}>
-                      <EditIcon
-                        sx={{ fontSize: 48, color: 'secondary.main', mb: 2 }}
-                      />
-                      <Typography variant="h6" gutterBottom>
-                        Edit Existing Plans
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{ mb: 2 }}
-                      >
-                        Modify and enhance your saved floorplans with our
-                        comprehensive editing tools.
-                      </Typography>
-                      <Button variant="outlined" fullWidth>
-                        Browse Plans
-                      </Button>
+                      {loading ? (
+                        <>
+                          <Skeleton
+                            variant="circular"
+                            width={48}
+                            height={48}
+                            sx={{ mx: 'auto', mb: 2 }}
+                          />
+                          <Skeleton
+                            variant="text"
+                            sx={{ fontSize: '1.25rem', mb: 1 }}
+                          />
+                          <Skeleton
+                            variant="text"
+                            sx={{ fontSize: '0.875rem', mb: 1 }}
+                          />
+                          <Skeleton
+                            variant="text"
+                            sx={{ fontSize: '0.875rem', mb: 2 }}
+                          />
+                          <Skeleton
+                            variant="rectangular"
+                            height={36}
+                            sx={{ borderRadius: 1 }}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <AddIcon
+                            sx={{
+                              fontSize: 48,
+                              color: 'primary.main',
+                              mb: 2,
+                            }}
+                          />
+                          <Typography variant="h6" gutterBottom>
+                            Create New Floorplan
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{ mb: 2 }}
+                          >
+                            Start from scratch or use our professional templates
+                            to design your custom floorplan.
+                          </Typography>
+                          <Button variant="outlined" fullWidth>
+                            Get Started
+                          </Button>
+                        </>
+                      )}
                     </CardContent>
                   </Card>
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 4 }}>
-                  <Card sx={{ height: '100%' }}>
+                  <Card
+                    sx={{
+                      height: '100%',
+                      cursor: loading ? 'default' : 'pointer',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      '&:hover': {
+                        boxShadow: loading ? 0 : 4,
+                        transform: loading ? 'scale(1)' : 'scale(1.02)',
+                      },
+                    }}
+                  >
                     <CardContent sx={{ textAlign: 'center', p: 3 }}>
-                      <ViewIcon
-                        sx={{ fontSize: 48, color: 'success.main', mb: 2 }}
-                      />
-                      <Typography variant="h6" gutterBottom>
-                        View Gallery
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{ mb: 2 }}
-                      >
-                        Explore our gallery of completed floorplans and get
-                        inspiration for your designs.
-                      </Typography>
-                      <Button variant="outlined" fullWidth>
-                        View Gallery
-                      </Button>
+                      {loading ? (
+                        <>
+                          <Skeleton
+                            variant="circular"
+                            width={48}
+                            height={48}
+                            sx={{ mx: 'auto', mb: 2 }}
+                          />
+                          <Skeleton
+                            variant="text"
+                            sx={{ fontSize: '1.25rem', mb: 1 }}
+                          />
+                          <Skeleton
+                            variant="text"
+                            sx={{ fontSize: '0.875rem', mb: 1 }}
+                          />
+                          <Skeleton
+                            variant="text"
+                            sx={{ fontSize: '0.875rem', mb: 2 }}
+                          />
+                          <Skeleton
+                            variant="rectangular"
+                            height={36}
+                            sx={{ borderRadius: 1 }}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <EditIcon
+                            sx={{
+                              fontSize: 48,
+                              color: 'secondary.main',
+                              mb: 2,
+                            }}
+                          />
+                          <Typography variant="h6" gutterBottom>
+                            Edit Existing Plans
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{ mb: 2 }}
+                          >
+                            Modify and enhance your saved floorplans with our
+                            comprehensive editing tools.
+                          </Typography>
+                          <Button variant="outlined" fullWidth>
+                            Browse Plans
+                          </Button>
+                        </>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Grid>
+
+                <Grid size={{ xs: 12, md: 4 }}>
+                  <Card
+                    sx={{
+                      height: '100%',
+                      cursor: loading ? 'default' : 'pointer',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      '&:hover': {
+                        boxShadow: loading ? 0 : 4,
+                        transform: loading ? 'scale(1)' : 'scale(1.02)',
+                      },
+                    }}
+                  >
+                    <CardContent sx={{ textAlign: 'center', p: 3 }}>
+                      {loading ? (
+                        <>
+                          <Skeleton
+                            variant="circular"
+                            width={48}
+                            height={48}
+                            sx={{ mx: 'auto', mb: 2 }}
+                          />
+                          <Skeleton
+                            variant="text"
+                            sx={{ fontSize: '1.25rem', mb: 1 }}
+                          />
+                          <Skeleton
+                            variant="text"
+                            sx={{ fontSize: '0.875rem', mb: 1 }}
+                          />
+                          <Skeleton
+                            variant="text"
+                            sx={{ fontSize: '0.875rem', mb: 2 }}
+                          />
+                          <Skeleton
+                            variant="rectangular"
+                            height={36}
+                            sx={{ borderRadius: 1 }}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <ViewIcon
+                            sx={{
+                              fontSize: 48,
+                              color: 'success.main',
+                              mb: 2,
+                            }}
+                          />
+                          <Typography variant="h6" gutterBottom>
+                            View Gallery
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{ mb: 2 }}
+                          >
+                            Explore our gallery of completed floorplans and get
+                            inspiration for your designs.
+                          </Typography>
+                          <Button variant="outlined" fullWidth>
+                            View Gallery
+                          </Button>
+                        </>
+                      )}
                     </CardContent>
                   </Card>
                 </Grid>
@@ -180,31 +330,69 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
 
               {/* Features Coming Soon */}
               <Paper sx={{ p: 3 }}>
-                <Typography variant="h6" gutterBottom>
-                  Coming Soon Features
-                </Typography>
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                      • Drag & Drop Designer
+                {loading ? (
+                  <>
+                    <Skeleton
+                      variant="text"
+                      sx={{ fontSize: '1.25rem', mb: 2 }}
+                      width="30%"
+                    />
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Skeleton
+                          variant="text"
+                          sx={{ fontSize: '0.875rem' }}
+                        />
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Skeleton
+                          variant="text"
+                          sx={{ fontSize: '0.875rem' }}
+                        />
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Skeleton
+                          variant="text"
+                          sx={{ fontSize: '0.875rem' }}
+                        />
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Skeleton
+                          variant="text"
+                          sx={{ fontSize: '0.875rem' }}
+                        />
+                      </Grid>
+                    </Grid>
+                  </>
+                ) : (
+                  <>
+                    <Typography variant="h6" gutterBottom>
+                      Coming Soon Features
                     </Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                      • 3D Visualization
-                    </Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                      • Collaboration Tools
-                    </Typography>
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                      • Export Options
-                    </Typography>
-                  </Grid>
-                </Grid>
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          • Drag & Drop Designer
+                        </Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          • 3D Visualization
+                        </Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          • Collaboration Tools
+                        </Typography>
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          • Export Options
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </>
+                )}
               </Paper>
             </Box>
           </Box>
