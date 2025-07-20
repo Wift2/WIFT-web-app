@@ -1,13 +1,12 @@
 import {
-  Typography,
   Box,
-  Paper,
-  Button,
   Card,
   CardContent,
+  Typography,
   Grid,
   Fade,
   Skeleton,
+  Button,
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -83,7 +82,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
 
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
               {/* Welcome Card */}
-              <Paper sx={{ p: 3 }}>
+              <Box sx={{ p: 3 }}>
                 {loading ? (
                   <>
                     <Skeleton
@@ -112,7 +111,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                     </Typography>
                   </>
                 )}
-              </Paper>
+              </Box>
 
               {/* Quick Actions */}
               <Grid container spacing={3}>
@@ -124,6 +123,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                       transform: animatingCard ? 'scale(1.2)' : 'scale(1)',
                       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       zIndex: animatingCard ? 10 : 1,
+                      borderRadius: '28px',
                       '&:hover': {
                         boxShadow: loading ? 0 : 4,
                         transform: animatingCard
@@ -197,6 +197,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                       height: '100%',
                       cursor: loading ? 'default' : 'pointer',
                       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      borderRadius: '28px',
                       '&:hover': {
                         boxShadow: loading ? 0 : 4,
                         transform: loading ? 'scale(1)' : 'scale(1.02)',
@@ -265,6 +266,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                       height: '100%',
                       cursor: loading ? 'default' : 'pointer',
                       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      borderRadius: '28px',
                       '&:hover': {
                         boxShadow: loading ? 0 : 4,
                         transform: loading ? 'scale(1)' : 'scale(1.02)',
@@ -329,7 +331,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
               </Grid>
 
               {/* Features Coming Soon */}
-              <Paper sx={{ p: 3 }}>
+              <Box sx={{ p: 3 }}>
                 {loading ? (
                   <>
                     <Skeleton
@@ -393,7 +395,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                     </Grid>
                   </>
                 )}
-              </Paper>
+              </Box>
             </Box>
           </Box>
         </Fade>
@@ -415,7 +417,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
               width: showForm ? '100%' : '300px',
             }}
           >
-            <Paper
+            <Box
               sx={{
                 p: 3,
                 transform: showForm ? 'scale(1)' : 'scale(0.9)',
@@ -429,7 +431,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                 onClose={handleBackToCards}
                 router={router}
               />
-            </Paper>
+            </Box>
           </Box>
         </Fade>
       )}
