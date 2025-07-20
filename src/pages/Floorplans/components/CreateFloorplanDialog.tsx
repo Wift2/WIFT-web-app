@@ -131,7 +131,13 @@ const CreateFloorplanDialog = ({
   return (
     <Dialog
       open={open}
-      onClose={onClose}
+      onClose={(_event, reason) => {
+        // Prevent closing on backdrop click or escape key
+        if (reason === 'backdropClick' || reason === 'escapeKeyDown') {
+          return;
+        }
+        onClose();
+      }}
       maxWidth="xs"
       fullWidth
       sx={{ '& .MuiDialog-paper': { maxWidth: '500px' } }}
