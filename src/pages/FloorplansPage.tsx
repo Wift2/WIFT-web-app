@@ -12,8 +12,16 @@ import {
   Edit as EditIcon,
   Visibility as ViewIcon,
 } from '@mui/icons-material';
+import type { Router } from '@toolpad/core';
 
-export default function FloorplansPage() {
+interface FloorplansPageProps {
+  router: Router;
+}
+
+export default function FloorplansPage({ router }: FloorplansPageProps) {
+  const handleCreateNew = () => {
+    router.navigate('/floorplans/create');
+  };
   return (
     <Box sx={{ p: 3 }}>
       <Box
@@ -32,6 +40,7 @@ export default function FloorplansPage() {
           startIcon={<AddIcon />}
           size="large"
           sx={{ minWidth: 160 }}
+          onClick={handleCreateNew}
         >
           Create New
         </Button>

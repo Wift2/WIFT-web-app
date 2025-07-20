@@ -11,6 +11,7 @@ import {
   Settings as SettingsIcon,
   Map as FloorplansIcon,
 } from '@mui/icons-material';
+import wiftMediumLogo from '../assets/wift-medium.webp';
 
 // Navigation configuration
 const NAVIGATION: Navigation = [
@@ -44,7 +45,7 @@ const NAVIGATION: Navigation = [
 
 const BRANDING = {
   title: 'WIFT',
-  logo: <img src="/wift-medium.webp" alt="WIFT" style={{ height: 24 }} />,
+  logo: <img src={wiftMediumLogo} alt="WIFT AI" style={{ height: 40 }} />,
 };
 
 interface DemoProps {

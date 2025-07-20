@@ -8,6 +8,7 @@ import '@aws-amplify/ui-react/styles.css';
 import './authenticator-styles.css';
 import '../lib/amplify';
 import { materialUITheme } from './auth-theme';
+import sqFootageOptionBg from '../assets/sq-footage-option.png';
 
 /**
  * AuthProvider - Handles authentication with AWS Cognito
@@ -115,16 +116,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
           justifyContent: 'center',
           alignItems: 'center',
           minHeight: '100vh',
-          backgroundColor: '#f5f5f5',
+          backgroundImage: `url(${sqFootageOptionBg})`,
+          backgroundSize: '100%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
           padding: '24px',
         }}
       >
-        <div
-          style={{
-            width: '100%',
-            maxWidth: '400px',
-          }}
-        >
+        <div style={{ marginRight: '67px' }}>
           <AmplifyThemeProvider theme={materialUITheme}>
             <Authenticator>
               {({ signOut: authSignOut, user: authUser }) => {
