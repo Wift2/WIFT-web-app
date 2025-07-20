@@ -54,7 +54,7 @@ interface DemoProps {
   children: React.ReactNode;
 }
 
-export default function DashboardLayoutBasic(props: DemoProps) {
+const DashboardLayoutBasic = (props: DemoProps) => {
   const { router } = props;
   const { user, signOut } = useAuth();
 
@@ -91,4 +91,6 @@ export default function DashboardLayoutBasic(props: DemoProps) {
       <DashboardLayout>{props.children}</DashboardLayout>
     </AppProvider>
   );
-}
+};
+
+export default DashboardLayoutBasic;

@@ -1,18 +1,27 @@
 import * as React from 'react';
 import type { Router } from '@toolpad/core';
 import DashboardLayoutBasic from '../components/DashboardLayout';
-import DashboardPage from '../pages/DashboardPage';
-import FloorplansPage from '../pages/FloorplansPage';
-import CreateFloorplanPage from '../pages/CreateFloorplanPage';
-import SettingsPage from '../pages/SettingsPage';
+import DashboardPage from '../pages/Dashboard';
+import FloorplansPage from '../pages/Floorplans';
+import CreateFloorplanPage from '../pages/Floorplans/CreateFloorplanPage';
+import SettingsPage from '../pages/Settings';
 
-function PageContent({
+/**
+ * Real URL Router Implementation
+ * See ROUTING.md for complete documentation and usage examples.
+ */
+
+/**
+ * Route-to-Component Mapping
+ * Add new routes here when creating new pages.
+ */
+const PageContent = ({
   pathname,
   router,
 }: {
   pathname: string;
   router: Router;
-}) {
+}) => {
   switch (pathname) {
     case '/dashboard': {
       return <DashboardPage />;
@@ -21,7 +30,7 @@ function PageContent({
       return <FloorplansPage router={router} />;
     }
     case '/floorplans/create': {
-      return <CreateFloorplanPage />;
+      return <CreateFloorplanPage router={router} />;
     }
     case '/settings': {
       return <SettingsPage />;
@@ -30,22 +39,61 @@ function PageContent({
       return <DashboardPage />;
     }
   }
-}
+};
 
-export default function DashboardLayoutBasicDemo() {
-  const [pathname, setPathname] = React.useState('/dashboard');
+const DashboardLayoutBasicDemo = () => {
+  // Initialize pathname from current browser URL, fallback to dashboard
+  const [pathname, setPathname] = React.useState(() => {
+    return globalThis.location.pathname || '/dashboard';
+  });
 
+  // Initialize search parameters from current browser URL
+  const [searchParams, setSearchParams] = React.useState(() => {
+    return new URLSearchParams(globalThis.location.search);
+  });
+
+  // Sync internal state changes to browser URL
+  React.useEffect(() => {
+    const url = searchParams.toString()
+      ? `${pathname}?${searchParams}`
+      : pathname;
+
+    if (globalThis.location.pathname + globalThis.location.search !== url) {
+      globalThis.history.pushState({}, '', url);
+    }
+  }, [pathname, searchParams]);
+
+  // Listen for browser back/forward navigation
+  React.useEffect(() => {
+    const handlePopState = () => {
+      setPathname(globalThis.location.pathname);
+      setSearchParams(new URLSearchParams(globalThis.location.search));
+    };
+
+    globalThis.addEventListener('popstate', handlePopState);
+    return () => globalThis.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Create router object with real URL functionality
   const router = React.useMemo<Router>(() => {
     return {
       pathname,
-      searchParams: new URLSearchParams(),
-      navigate: (path) => setPathname(String(path)),
+      searchParams,
+      navigate: (path) => {
+        const url = String(path);
+        const [newPathname, search] = url.split('?');
+
+        setPathname(newPathname);
+        setSearchParams(new URLSearchParams(search || ''));
+      },
     };
-  }, [pathname]);
+  }, [pathname, searchParams]);
 
   return (
     <DashboardLayoutBasic pathname={pathname} router={router}>
       <PageContent pathname={pathname} router={router} />
     </DashboardLayoutBasic>
   );
-}
+};
+
+export default DashboardLayoutBasicDemo;

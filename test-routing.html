@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Routing Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        .test-link { display: block; margin: 10px 0; padding: 10px; background: #f5f5f5; text-decoration: none; color: #0066cc; }
+        .test-link:hover { background: #e5e5e5; }
+        .instructions { background: #fff3cd; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>WIFT URL Routing Test</h1>
+    
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <ol>
+            <li>Click on the test links below</li>
+            <li>Check that the browser URL changes correctly</li>
+            <li>Verify that the page content matches the URL</li>
+            <li>Test browser back/forward buttons</li>
+            <li>Copy and paste URLs to test bookmarkability</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h3>Basic Navigation Tests</h3>
+        <a href="http://localhost:5174/" class="test-link">
+            Dashboard (Root) - http://localhost:5174/
+        </a>
+        <a href="http://localhost:5174/dashboard" class="test-link">
+            Dashboard Page - http://localhost:5174/dashboard
+        </a>
+        <a href="http://localhost:5174/floorplans" class="test-link">
+            Floorplans Page - http://localhost:5174/floorplans
+        </a>
+        <a href="http://localhost:5174/settings" class="test-link">
+            Settings Page - http://localhost:5174/settings
+        </a>
+    </div>
+
+    <div class="test-section">
+        <h3>Floorplan Creation with URL Parameters</h3>
+        <a href="http://localhost:5174/floorplans/create" class="test-link">
+            Create Floorplan (Basic) - http://localhost:5174/floorplans/create
+        </a>
+        <a href="http://localhost:5174/floorplans/create?type=squareFootage&length=50&width=30&height=12&screenType=Front&seatingType=Full&tableSize=60&tableSeats=6" class="test-link">
+            Square Footage Form Data - http://localhost:5174/floorplans/create?type=squareFootage&length=50&width=30&height=12&screenType=Front&seatingType=Full&tableSize=60&tableSeats=6
+        </a>
+        <a href="http://localhost:5174/floorplans/create?type=attendees&attendees=75&screenType=LED&seatingType=Theatre" class="test-link">
+            Attendees Form Data - http://localhost:5174/floorplans/create?type=attendees&attendees=75&screenType=LED&seatingType=Theatre
+        </a>
+    </div>
+
+    <div class="test-section">
+        <h3>Expected Behavior</h3>
+        <ul>
+            <li><strong>URL Changes:</strong> Browser address bar should update when navigating</li>
+            <li><strong>Search Parameters:</strong> Form data URLs should be processed correctly</li>
+            <li><strong>Bookmarking:</strong> Copy/paste URLs should work</li>
+            <li><strong>Browser Navigation:</strong> Back/forward buttons should work</li>
+            <li><strong>Page Refresh:</strong> Should load the correct page after refresh</li>
+        </ul>
+    </div>
+
+    <script>
+        // Add some JavaScript to test URL changes
+        console.log('Current URL:', window.location.href);
+        console.log('Current pathname:', window.location.pathname);
+        console.log('Current search params:', window.location.search);
+        
+        // Monitor URL changes
+        let currentUrl = window.location.href;
+        setInterval(() => {
+            if (window.location.href !== currentUrl) {
+                currentUrl = window.location.href;
+                console.log('URL changed to:', currentUrl);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
