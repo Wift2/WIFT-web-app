@@ -8,7 +8,6 @@ import '@aws-amplify/ui-react/styles.css';
 import './authenticator-styles.css';
 import '../lib/amplify';
 import { materialUITheme } from './auth-theme';
-import sqFootageOptionBg from '../assets/sq-footage-option.png';
 
 /**
  * AuthProvider - Handles authentication with AWS Cognito
@@ -116,40 +115,33 @@ export function AuthProvider({ children }: AuthProviderProps) {
           justifyContent: 'center',
           alignItems: 'center',
           minHeight: '100vh',
-          backgroundImage: `url(${sqFootageOptionBg})`,
-          backgroundSize: '100%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          padding: '24px',
         }}
       >
-        <div style={{ marginRight: '67px' }}>
-          <AmplifyThemeProvider theme={materialUITheme}>
-            <Authenticator>
-              {({ signOut: authSignOut, user: authUser }) => {
-                // Update the user state when authenticated
-                if (authUser) {
-                  setUser(authUser);
-                }
-                return (
-                  <AuthContext.Provider
-                    value={{
-                      user: authUser || null,
-                      loading: false,
-                      signOut: authSignOut
-                        ? async () => authSignOut()
-                        : async () => {
-                            // No-op fallback for signOut
-                          },
-                    }}
-                  >
-                    {children}
-                  </AuthContext.Provider>
-                );
-              }}
-            </Authenticator>
-          </AmplifyThemeProvider>
-        </div>
+        <AmplifyThemeProvider theme={materialUITheme}>
+          <Authenticator>
+            {({ signOut: authSignOut, user: authUser }) => {
+              // Update the user state when authenticated
+              if (authUser) {
+                setUser(authUser);
+              }
+              return (
+                <AuthContext.Provider
+                  value={{
+                    user: authUser || null,
+                    loading: false,
+                    signOut: authSignOut
+                      ? async () => authSignOut()
+                      : async () => {
+                          // No-op fallback for signOut
+                        },
+                  }}
+                >
+                  {children}
+                </AuthContext.Provider>
+              );
+            }}
+          </Authenticator>
+        </AmplifyThemeProvider>
       </div>
     );
   }

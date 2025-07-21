@@ -11,18 +11,6 @@
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
-/* Custom border radius for authenticator bottom corners */
-div[data-amplify-router] {
-  border-bottom-left-radius: 165px !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-/* Custom width for authenticator container */
-div[data-amplify-container] {
-  width: 24rem !important;
-}
-
 /* Button styling to match Material-UI */
 .amplify-button[data-variation='primary'] {
   --amplify-components-button-primary-background-color: #0369a1;
