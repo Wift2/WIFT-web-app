@@ -54,6 +54,14 @@ export default tseslint
         eqeqeq: ['error', 'always'],
         curly: ['error', 'all'],
 
+        // Line ending rules - disable for cross-platform compatibility
+        'prettier/prettier': [
+          'error',
+          {
+            endOfLine: 'auto',
+          },
+        ],
+
         // Unicorn rules customization
         'unicorn/prevent-abbreviations': 'off', // Allow common abbreviations like 'props', 'ref'
         'unicorn/filename-case': [
