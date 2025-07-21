@@ -15,6 +15,7 @@ dist-ssr
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 .idea
 .DS_Store
 *.suo
@@ -22,6 +23,29 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Platform-specific files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Windows
+*.tmp
+*.temp
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
 
 # Amplify
 .amplify/

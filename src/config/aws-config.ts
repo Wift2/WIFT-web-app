@@ -18,11 +18,11 @@ export const awsConfig: ResourcesConfig = {
           scopes: ['openid', 'email', 'profile'],
           redirectSignIn: [
             import.meta.env.VITE_AWS_REDIRECT_SIGN_IN ||
-              'http://localhost:5174/',
+              'http://localhost:5173/',
           ],
           redirectSignOut: [
             import.meta.env.VITE_AWS_REDIRECT_SIGN_OUT ||
-              'http://localhost:5174/',
+              'http://localhost:5173/',
           ],
           responseType: 'code',
           providers: ['Google'],

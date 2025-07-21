@@ -141,15 +141,15 @@ router.navigate(`/floorplans/create?${newParams.toString()}`);
 ### Manual Testing URLs
 ```
 # Basic pages
-http://localhost:5174/
-http://localhost:5174/dashboard
-http://localhost:5174/floorplans
-http://localhost:5174/settings
+http://localhost:5173/
+http://localhost:5173/dashboard
+http://localhost:5173/floorplans
+http://localhost:5173/settings
 
 # Floorplan creation with parameters
-http://localhost:5174/floorplans/create?type=squareFootage&length=50&width=30&height=12&screenType=Front&seatingType=Full&tableSize=60&tableSeats=6
+http://localhost:5173/floorplans/create?type=squareFootage&length=50&width=30&height=12&screenType=Front&seatingType=Full&tableSize=60&tableSeats=6
 
-http://localhost:5174/floorplans/create?type=attendees&attendees=75&screenType=LED&seatingType=Theatre
+http://localhost:5173/floorplans/create?type=attendees&attendees=75&screenType=LED&seatingType=Theatre
 ```
 
 ### Test Checklist

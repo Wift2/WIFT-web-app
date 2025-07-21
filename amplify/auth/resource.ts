@@ -21,11 +21,11 @@ export const auth = defineAuth({
         scopes: ['email', 'profile'],
       },
       callbackUrls: [
-        'http://localhost:5174',
+        'http://localhost:5173',
         'https://main.d2z8xrqk5yt3yl.amplifyapp.com', // Replace with your Amplify domain
       ],
       logoutUrls: [
-        'http://localhost:5174',
+        'http://localhost:5173',
         'https://main.d2z8xrqk5yt3yl.amplifyapp.com', // Replace with your Amplify domain
       ],
     },
