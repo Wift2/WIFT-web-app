@@ -45,7 +45,14 @@ const SquareFootageForm = ({
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 3,
+        bgcolor: 'background.paper',
+      }}
+    >
       <Box sx={{ display: 'flex', gap: 2 }}>
         <TextField
           label="Length (ft)"

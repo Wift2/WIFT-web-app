@@ -16,6 +16,7 @@ import {
 import { useState, useEffect } from 'react';
 import type { Router } from '@toolpad/core';
 import CreateFloorplanDialog from './components/CreateFloorplanDialog';
+import GradientTitle from '../../components/GradientTitle';
 
 interface FloorplansPageProps {
   router: Router;
@@ -63,17 +64,19 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                mb: 3,
               }}
             >
-              <Typography variant="h4" component="h1">
+              <GradientTitle variant="h2" component="h1">
                 Custom Floorplans
-              </Typography>
+              </GradientTitle>
               <Button
-                variant="contained"
-                startIcon={<AddIcon />}
+                variant="outlined"
+                startIcon={<AddIcon color="secondary" />}
                 size="large"
-                sx={{ minWidth: 160 }}
+                sx={{
+                  minWidth: 160,
+                  color: 'secondary.main',
+                }}
                 onClick={handleCreateNew}
               >
                 Create New
@@ -105,16 +108,54 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
                       Design and create custom floorplans with our intuitive
-                      drag-and-drop interface. Build detailed layouts for
-                      residential and commercial properties with precision tools
-                      and professional templates.
+                      drag-and-drop interface. WIFT will give you the confidence
+                      you need to assign and allocate meeting space based on
+                      your client's unique needs.
                     </Typography>
                   </>
                 )}
               </Box>
 
               {/* Quick Actions */}
-              <Grid container spacing={3}>
+              <Grid
+                container
+                spacing={3}
+                sx={{
+                  position: 'relative',
+                  '&::before': {
+                    content: '""',
+                    display: 'block',
+                    width: '428px',
+                    height: '110px',
+                    position: 'absolute',
+                    zIndex: 0,
+                    transform: 'translate(22%, 16%)',
+                    borderRadius: '428px',
+                    opacity: 0.25,
+                    background: '#0369a1',
+                    filter: 'blur(110px)',
+                    top: '53px',
+                  },
+                  '&::after': {
+                    content: '""',
+                    display: 'block',
+                    width: '510px',
+                    height: '110px',
+                    position: 'absolute',
+                    zIndex: 0,
+                    transform: 'translate(80%, 28%)',
+                    borderRadius: '611px',
+                    opacity: 0.3,
+                    background: '#11b83a',
+                    filter: 'blur(90px)',
+                    top: '53px',
+                  },
+                  '& > *': {
+                    position: 'relative',
+                    zIndex: 1,
+                  },
+                }}
+              >
                 <Grid size={{ xs: 12, md: 4 }}>
                   <Card
                     sx={{
@@ -125,12 +166,14 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                       zIndex: animatingCard ? 10 : 1,
                       borderRadius: '28px',
                       '&:hover': {
-                        boxShadow: loading ? 0 : 4,
+                        boxShadow: loading
+                          ? '0px 4px 12px rgba(124, 58, 237, 0.08)'
+                          : '0px 8px 24px rgba(124, 58, 237, 0.12)',
                         transform: animatingCard
                           ? 'scale(1.2)'
                           : loading
-                            ? 'scale(1)'
-                            : 'scale(1.02)',
+                            ? 'translateY(0)'
+                            : 'translateY(-2px) scale(1.02)',
                       },
                     }}
                     onClick={loading ? undefined : handleCreateNew}
@@ -199,8 +242,12 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       borderRadius: '28px',
                       '&:hover': {
-                        boxShadow: loading ? 0 : 4,
-                        transform: loading ? 'scale(1)' : 'scale(1.02)',
+                        boxShadow: loading
+                          ? '0px 4px 12px rgba(124, 58, 237, 0.08)'
+                          : '0px 8px 24px rgba(124, 58, 237, 0.12)',
+                        transform: loading
+                          ? 'translateY(0)'
+                          : 'translateY(-2px) scale(1.02)',
                       },
                     }}
                   >
@@ -236,7 +283,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                           <EditIcon
                             sx={{
                               fontSize: 48,
-                              color: 'secondary.main',
+                              color: 'success.main',
                               mb: 2,
                             }}
                           />
@@ -268,8 +315,12 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       borderRadius: '28px',
                       '&:hover': {
-                        boxShadow: loading ? 0 : 4,
-                        transform: loading ? 'scale(1)' : 'scale(1.02)',
+                        boxShadow: loading
+                          ? '0px 4px 12px rgba(124, 58, 237, 0.08)'
+                          : '0px 8px 24px rgba(124, 58, 237, 0.12)',
+                        transform: loading
+                          ? 'translateY(0)'
+                          : 'translateY(-2px) scale(1.02)',
                       },
                     }}
                   >
@@ -305,7 +356,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                           <ViewIcon
                             sx={{
                               fontSize: 48,
-                              color: 'success.main',
+                              color: '#7C3AED',
                               mb: 2,
                             }}
                           />

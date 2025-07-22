@@ -1,0 +1,14 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- WIFT Logo with Filled Bottom and Right Angle Hash Marks - Black Version -->
+  <g fill="black">
+    <!-- W shape outline -->
+    <path d="M4 6V14C4 16.2091 5.79086 18 8 18L9.85 18" stroke="black" stroke-width="2" fill="none"/>
+    <path d="M9.85 6V14C9.85 16.2091 11.6409 18 13.85 18C16.0591 18 17.85 16.2091 17.85 14V6" stroke="black" stroke-width="2" fill="none"/>
+    <!-- Filled bottom area (50% narrower, centered) -->
+    <rect x="7.128" y="17" width="7.344" height="2" fill="black" rx="1"/>
+  </g>
+</svg>
+    <!-- Central element -->
+    <circle cx="12" cy="12" r="1.5"/>
+  </g>
+</svg>

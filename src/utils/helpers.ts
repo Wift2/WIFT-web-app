@@ -1,5 +1,5 @@
 /**
- * Utility functions for the WiftAI WebApp
+ * Utility functions for the WIFT AI WebApp
  */
 
 /**

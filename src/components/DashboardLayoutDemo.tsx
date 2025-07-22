@@ -44,13 +44,22 @@ const PageContent = ({
 const DashboardLayoutBasicDemo = () => {
   // Initialize pathname from current browser URL, fallback to dashboard
   const [pathname, setPathname] = React.useState(() => {
-    return globalThis.location.pathname || '/dashboard';
+    const currentPath = globalThis.location.pathname;
+    // If at root or empty path, default to dashboard
+    return currentPath === '/' || !currentPath ? '/dashboard' : currentPath;
   });
 
   // Initialize search parameters from current browser URL
   const [searchParams, setSearchParams] = React.useState(() => {
     return new URLSearchParams(globalThis.location.search);
   });
+
+  // Handle initial redirect to dashboard if at root
+  React.useEffect(() => {
+    if (globalThis.location.pathname === '/' && pathname === '/dashboard') {
+      globalThis.history.replaceState({}, '', '/dashboard');
+    }
+  }, [pathname]);
 
   // Sync internal state changes to browser URL
   React.useEffect(() => {

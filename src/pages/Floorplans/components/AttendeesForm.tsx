@@ -40,7 +40,14 @@ const AttendeesForm = ({ formData, onFormChange }: AttendeesFormProps) => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 3,
+        bgcolor: 'background.paper',
+      }}
+    >
       <TextField
         label="Number of Attendees"
         placeholder="150"

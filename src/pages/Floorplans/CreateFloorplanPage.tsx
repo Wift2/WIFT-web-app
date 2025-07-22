@@ -29,6 +29,7 @@ import {
   Tune as TuneIcon,
 } from '@mui/icons-material';
 import type { Router } from '@toolpad/core';
+import GradientTitle from '../../components/GradientTitle';
 
 // Venue configuration types
 interface Venue {
@@ -555,9 +556,9 @@ const CreateFloorplanPage = ({ router }: CreateFloorplanPageProps) => {
       >
         {/* Header */}
         <Box sx={{ mb: 3 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
+          <GradientTitle variant="h4" component="h1" gutterBottom>
             Create New Floorplan
-          </Typography>
+          </GradientTitle>
           <Typography variant="subtitle1" color="text.secondary">
             Design conference room layouts for meeting planners and event
             organizers

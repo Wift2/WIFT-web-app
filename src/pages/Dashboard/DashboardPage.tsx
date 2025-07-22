@@ -7,15 +7,16 @@ import {
   Stack,
 } from '@mui/material';
 import { useAuth } from '../../hooks/useAuth';
+import GradientTitle from '../../components/GradientTitle';
 
 const DashboardPage = () => {
   const { user } = useAuth();
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
+      <GradientTitle variant="h4" component="h1" gutterBottom>
         Welcome back, {user?.username}!
-      </Typography>
+      </GradientTitle>
       <Typography variant="subtitle1" color="text.secondary" gutterBottom>
         Here's what's happening with your account today.
       </Typography>
@@ -27,10 +28,12 @@ const DashboardPage = () => {
               <Typography color="text.secondary" gutterBottom>
                 Total Users
               </Typography>
-              <Typography variant="h5" component="div">
+              <Typography variant="h5" component="div" gutterBottom>
                 1,234
               </Typography>
-              <Typography variant="body2">+12% from last month</Typography>
+              <Typography variant="body2" color="secondary.main">
+                +12% from last month
+              </Typography>
             </CardContent>
           </Card>
           <Card sx={{ minWidth: 275 }}>
@@ -38,10 +41,12 @@ const DashboardPage = () => {
               <Typography color="text.secondary" gutterBottom>
                 Revenue
               </Typography>
-              <Typography variant="h5" component="div">
+              <Typography variant="h5" component="div" gutterBottom>
                 $12,345
               </Typography>
-              <Typography variant="body2">+8% from last month</Typography>
+              <Typography variant="body2" color="secondary.main">
+                +8% from last month
+              </Typography>
             </CardContent>
           </Card>
         </Stack>
@@ -52,10 +57,12 @@ const DashboardPage = () => {
               <Typography color="text.secondary" gutterBottom>
                 Active Projects
               </Typography>
-              <Typography variant="h5" component="div">
+              <Typography variant="h5" component="div" gutterBottom>
                 23
               </Typography>
-              <Typography variant="body2">+3 new this week</Typography>
+              <Typography variant="body2" color="secondary.main">
+                +3 new this week
+              </Typography>
             </CardContent>
           </Card>
           <Card sx={{ minWidth: 275 }}>
@@ -63,10 +70,12 @@ const DashboardPage = () => {
               <Typography color="text.secondary" gutterBottom>
                 Completion Rate
               </Typography>
-              <Typography variant="h5" component="div">
+              <Typography variant="h5" component="div" gutterBottom>
                 94%
               </Typography>
-              <Typography variant="body2">+2% from last month</Typography>
+              <Typography variant="body2" color="secondary.main">
+                +2% from last month
+              </Typography>
             </CardContent>
           </Card>
         </Stack>

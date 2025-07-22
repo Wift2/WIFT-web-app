@@ -1,0 +1,13 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Black circle background -->
+  <circle cx="16" cy="16" r="16" fill="#000000"/>
+  
+  <!-- WIFT Logo centered and properly scaled for clarity -->
+  <g transform="translate(6, 6) scale(0.83)">
+    <!-- W shape outline with thicker strokes for better visibility -->
+    <path d="M4 6V14C4 16.2091 5.79086 18 8 18L9.85 18" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M9.85 6V14C9.85 16.2091 11.6409 18 13.85 18C16.0591 18 17.85 16.2091 17.85 14V6" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Filled bottom area with better proportions -->
+    <rect x="7.128" y="17" width="7.344" height="2" fill="#FFFFFF" rx="1"/>
+  </g>
+</svg>
