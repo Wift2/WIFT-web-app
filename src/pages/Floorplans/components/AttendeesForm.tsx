@@ -2,7 +2,6 @@ import {
   Box,
   TextField,
   FormLabel,
-  Chip,
   ToggleButtonGroup,
   ToggleButton,
   Typography,
@@ -279,11 +278,6 @@ const AttendeesForm = ({ formData, onFormChange }: AttendeesFormProps) => {
                   </ToggleButton>
                 </ToggleButtonGroup>
               </Box>
-            </Box>
-            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-              <Chip label="Automatic Sizing" variant="outlined" size="small" />
-              <Chip label="Optimized Layout" variant="outlined" size="small" />
-              <Chip label="Capacity Based" variant="outlined" size="small" />
             </Box>
           </Box>
 

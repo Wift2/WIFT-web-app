@@ -2,7 +2,6 @@ import {
   Box,
   TextField,
   FormLabel,
-  Chip,
   ToggleButtonGroup,
   ToggleButton,
   Typography,
@@ -301,15 +300,6 @@ const SquareFootageForm = ({
                   </ToggleButton>
                 </ToggleButtonGroup>
               </Box>
-            </Box>
-            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-              <Chip
-                label="Professional Setup"
-                variant="outlined"
-                size="small"
-              />
-              <Chip label="Customizable" variant="outlined" size="small" />
-              <Chip label="Scalable" variant="outlined" size="small" />
             </Box>
           </Box>
 
