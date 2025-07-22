@@ -1,13 +1,6 @@
 # WIFT - Custom Floorplan Creator
 
-A modern web application for creating and ma│ │ └── Settings/
-│ │ └── SettingsPage.tsx # User settings and preferences
-│ ├── themes/ # WIFT theme system
-│ │ ├── wift/
-│ │ │ └── index.ts # WIFT brand theme implementation
-│ │ └── index.ts # Theme registry and utilities
-│ └── utils/
-│ └── helpers.ts # Utility functionstom floorplans. Built with React, TypeScript, and Material-UI, featuring AWS Cognito authentication with Google OAuth support and advanced theming capabilities.
+A modern web application for creating and managing custom floorplans. Built with React, TypeScript, and Material-UI, featuring AWS Cognito authentication with Google OAuth support and advanced theming capabilities.
 
 ## Features
 
@@ -17,8 +10,8 @@ A modern web application for creating and ma│ │ └── Settings/
 - **3D Visualization**: View your floorplans in 3D (coming soon)
 - **Collaboration Tools**: Share and collaborate on designs (coming soon)
 - **Export Options**: Multiple format support for your designs (coming soon)
-- **AWS Cognito Authentication**: Secure user authentication with Google OAuth support
-- **WIFT Theme System**: Custom brand theme with light and dark mode variants
+- **AWS Cognito Authentication**: Secure user authentication with Google OAuth support via Amplify Gen 2
+- **WIFT Theme System**: Custom brand theme with professional blue/green color scheme
 - **Responsive Design**: Mobile-first responsive design optimized for all devices
 - **Professional Navigation**: Clean sidebar navigation with integrated theme controls
 - **Code Quality**: Comprehensive ESLint, Prettier, and Unicorn plugin setup
@@ -46,9 +39,9 @@ chmod +x setup.sh
 
 ```bash
 npm install
-cp .env.example .env.local  # Copy environment template
+cp .env.example .env.local  # Copy environment template (optional)
 npm run setup               # Run initial setup
-npm run dev                 # Start development server
+npm run dev                 # Start development server (works immediately with mock auth)
 ```
 
 > 📚 **Detailed Setup**: See [Cross-Platform Development Guide](./CROSS_PLATFORM_GUIDE.md) for platform-specific instructions, troubleshooting, and advanced configuration.
@@ -61,7 +54,7 @@ npm run dev                 # Start development server
 - **Material UI 7.2** - Complete design system with advanced theming capabilities
 - **WIFT Theme System** - Custom brand implementation optimized for the platform
 - **Roboto Font** - Google's Material Design font for consistent typography
-- **AWS Amplify 6.15** - AWS Cognito authentication integration
+- **AWS Amplify 6.15** - Modern Amplify Gen 2 backend with automatic resource generation
 - **Vite 7.0** - Lightning-fast build tool and development server
 - **ESLint 9.30 + Unicorn** - Advanced code quality enforcement
 - **Prettier 3.6** - Consistent code formatting
@@ -101,9 +94,6 @@ npm run dev                 # Start development server
 │   │   ├── wift/
 │   │   │   └── index.ts     # WIFT brand theme implementation
 │   │   └── index.ts         # Theme registry and utilities
-│   │   ├── wift/
-│   │   │   └── index.ts     # WIFT brand theme implementation
-│   │   └── index.ts         # Theme registry and utilities
 │   └── utils/
 │       └── helpers.ts        # Utility functions
 ├── eslint.config.js          # ESLint configuration with Unicorn
@@ -121,7 +111,7 @@ npm run dev                 # Start development server
 
 ### Development Mode
 
-The application includes a development mode bypass for local development without AWS setup:
+The application includes a development mode bypass for immediate local development without any AWS setup:
 
 ```bash
 # Quick start - no AWS configuration needed
@@ -129,11 +119,42 @@ npm install
 npm run dev
 ```
 
-The app will run with a mock authenticated user for immediate development.
+The app will automatically run with a mock authenticated user when no AWS configuration is detected, allowing you to develop and test the UI immediately.
 
-### Production AWS Setup (Optional)
+### Testing Real Cognito Authentication
 
-For production deployment with real AWS Cognito authentication:
+To test with real AWS Cognito authentication, you have two options:
+
+#### Option 1: Amplify Sandbox (Recommended)
+
+Use Amplify's sandbox environment to create temporary AWS resources for testing:
+
+```bash
+# Start Amplify sandbox (creates temporary AWS backend)
+npm run amplify:sandbox
+
+# In another terminal, start your dev server
+npm run dev
+```
+
+The sandbox will:
+- Create temporary AWS Cognito User Pool
+- Generate `amplify_outputs.json` automatically
+- Enable real authentication flows (sign-up, sign-in, Google OAuth)
+- Clean up resources when stopped
+
+#### Option 2: Manual AWS Configuration
+
+Create your own AWS resources and configure manually:
+
+1. **Set up AWS credentials** using `aws configure` or environment variables
+2. **Create `.env.local`** with your AWS settings (see `.env.example`)
+3. **Set `VITE_DEV_MODE=false`** to disable mock authentication
+4. **Start development server** with `npm run dev`
+
+### Production AWS Setup (Manual Configuration)
+
+For production deployment or custom AWS setup, you can manually configure AWS resources:
 
 1. **Create AWS Cognito User Pool**
    - Configure OAuth settings with your domain
@@ -153,12 +174,15 @@ For production deployment with real AWS Cognito authentication:
    Create `.env.local` with your AWS settings:
 
    ```env
+   VITE_DEV_MODE=false  # Disable development mode
    VITE_AWS_USER_POOL_ID=us-east-1_XXXXXXXXX
    VITE_AWS_USER_POOL_CLIENT_ID=xxxxxxxxxxxxxxxxxxxxxxxxxx
    VITE_AWS_OAUTH_DOMAIN=your-domain.auth.us-east-1.amazoncognito.com
    VITE_AWS_REDIRECT_SIGN_IN=http://localhost:5173/
    VITE_AWS_REDIRECT_SIGN_OUT=http://localhost:5173/
    ```
+
+   **Note**: When using Amplify Gen 2 (recommended), the `amplify_outputs.json` file will automatically configure these settings, making manual `.env.local` setup unnecessary.
 
 ### Available Scripts
 
@@ -189,6 +213,11 @@ npm run format:check     # Check formatting without changes
 npm run fix:line-endings # Fix line ending issues (Windows/Mac/Linux compatibility)
 npm run type-check       # TypeScript type checking
 
+# AWS Amplify Backend
+npm run amplify:sandbox  # Start temporary AWS backend for testing
+npm run amplify:generate # Generate types from backend schema
+npm run amplify:deploy   # Deploy backend to AWS
+
 # Testing
 npm run test             # Run Vitest tests
 npm run test:ui          # Run tests with UI
@@ -205,9 +234,10 @@ npm run setup:dev        # Setup and start development
 
 ### Authentication Flow
 
-- **Development Mode**: Automatic mock authentication for local development
-- **Production Mode**: Full AWS Cognito integration with OAuth flow
-- **Google OAuth**: One-click sign-in with Google accounts via Cognito federation
+- **Development Mode**: Automatic mock authentication for immediate local development (no AWS setup required)
+- **Sandbox Mode**: Real AWS Cognito testing with temporary resources via `npm run amplify:sandbox`
+- **Production Mode**: Full AWS Cognito integration with persistent backend resources
+- **Google OAuth**: One-click sign-in with Google accounts via Cognito federation (requires Google Cloud setup)
 - **Custom Theming**: WIFT-styled Authenticator with brand colors and consistent design
 - **User Management**: Secure sign-in/sign-out with user context
 - **Protected Routes**: Authentication-gated dashboard access
@@ -221,11 +251,11 @@ npm run setup:dev        # Setup and start development
 ### Material-UI Integration
 
 - **Toolpad Core**: Professional dashboard layout with responsive navigation
-- **WIFT Theme Support**: Custom WIFT brand theme with light and dark mode variants
+- **WIFT Theme Support**: Custom WIFT brand theme with blue/green color scheme
 - **Roboto Typography**: Google's Material Design font with full weight variants (300, 400, 500, 700)
 - **Component Library**: Full Material-UI v7 component ecosystem
 - **Responsive Design**: Mobile-first approach with breakpoint management
-- **Theme System**: Ready for expansion with additional themes in the future
+- **Theme System**: Single WIFT theme optimized for the platform (expandable for future themes)
 
 ## Development Workflow
 
@@ -250,24 +280,29 @@ The project enforces high code quality with:
 
 ### AWS Amplify Deployment (Recommended)
 
-WIFT is optimized for AWS Amplify with automatic CI/CD and backend integration:
+WIFT is optimized for AWS Amplify Gen 2 with automatic CI/CD and backend integration:
 
 ```bash
-# Deploy to Amplify
+# Deploy backend to AWS
 npm run amplify:deploy
 
-# Start local sandbox environment
+# Start local sandbox environment for testing
 npm run amplify:sandbox
 ```
 
 **Features:**
 
 - **One-Click Deploy**: Connect Git repo for automatic deployments
-- **Backend Integration**: AWS Cognito authentication pre-configured
+- **Amplify Gen 2 Backend**: Modern backend-as-code with TypeScript definitions
+- **Auto-Generated Config**: `amplify_outputs.json` automatically created and updated
 - **Global CDN**: Automatic SSL and worldwide distribution
 - **Environment Management**: Automatic branch-based deployments
 
 See [AMPLIFY_DEPLOYMENT.md](AMPLIFY_DEPLOYMENT.md) for complete setup instructions.
+
+> 📚 **Additional Guides**: 
+> - [Cross-Platform Development Guide](./CROSS_PLATFORM_GUIDE.md) - Platform-specific setup and troubleshooting
+> - [Routing Implementation Guide](./ROUTING.md) - Custom URL routing with Toolpad Core
 
 ### Manual Build Process
 
@@ -309,6 +344,97 @@ npm run preview
 - **Integration**: Seamless AWS ecosystem integration
 - **Compliance**: GDPR, HIPAA, and SOC compliance support
 
+## Testing Cognito Authentication
+
+### Development Mode (No AWS Setup)
+
+For immediate development and UI testing:
+
+```bash
+npm run dev
+```
+
+The app automatically detects when no AWS configuration exists and runs in development mode with a mock authenticated user. This allows you to:
+- Test UI components and navigation
+- Develop features without AWS dependencies
+- Test authentication context and hooks
+
+### Sandbox Testing (Real AWS, Temporary)
+
+For testing real authentication flows without permanent AWS resources:
+
+1. **Start Amplify Sandbox**:
+   ```bash
+   npm run amplify:sandbox
+   ```
+   
+2. **Wait for deployment** (2-5 minutes). The sandbox will:
+   - Create temporary AWS Cognito User Pool
+   - Generate `amplify_outputs.json` automatically
+   - Configure authentication settings
+
+3. **Start development server** (in another terminal):
+   ```bash
+   npm run dev
+   ```
+
+4. **Test authentication flows**:
+   - ✅ New user registration with email verification
+   - ✅ Sign in with email/password
+   - ✅ Password reset functionality
+   - ✅ Sign out and session management
+   - ✅ Google OAuth (if configured with secrets)
+
+5. **Stop sandbox** when done:
+   - Press `Ctrl+C` in the sandbox terminal
+   - Temporary AWS resources are automatically cleaned up
+
+### Google OAuth Testing (Optional)
+
+To test Google OAuth in sandbox mode:
+
+1. **Set up Google OAuth credentials** in [Google Cloud Console](https://console.cloud.google.com)
+2. **Add secrets to sandbox**:
+   ```bash
+   npx ampx sandbox secret set GOOGLE_CLIENT_ID
+   npx ampx sandbox secret set GOOGLE_CLIENT_SECRET
+   ```
+3. **Test Google sign-in flow** in your application
+
+### Production Testing
+
+For testing against permanent AWS resources:
+
+1. **Deploy backend**:
+   ```bash
+   npm run amplify:deploy
+   ```
+2. **Configure production domains** in callback URLs
+3. **Test with production user pool** and OAuth settings
+
+### Authentication Test Checklist
+
+#### Basic Authentication:
+- [ ] User registration with email
+- [ ] Email verification process
+- [ ] Sign in with verified credentials
+- [ ] Password reset flow
+- [ ] Sign out functionality
+- [ ] Session persistence across page refreshes
+
+#### Error Handling:
+- [ ] Invalid email format validation
+- [ ] Password strength requirements
+- [ ] Duplicate email registration handling
+- [ ] Wrong credentials error messages
+- [ ] Network connectivity error handling
+
+#### OAuth Integration:
+- [ ] Google OAuth button appears
+- [ ] Google sign-in flow completes
+- [ ] User profile data mapping
+- [ ] OAuth error handling
+
 ## Troubleshooting
 
 ### Common Development Issues
@@ -334,20 +460,24 @@ npm run lint
 
 ### Authentication Issues
 
-**Development Mode**: Ensure no `.env.local` file exists for mock authentication
+**Development Mode**: Ensure no `.env.local` file exists or `VITE_DEV_MODE=true` for mock authentication
+
+**Sandbox Mode**:
+- Run `npm run amplify:sandbox` and wait for "Watching for file changes" message
+- Ensure AWS credentials are configured (`aws configure` or environment variables)
+- Check that `amplify_outputs.json` was generated after sandbox startup
 
 **Production Mode**:
-
 - Verify AWS credentials and User Pool configuration
 - Check redirect URLs match your deployed domain
-- Confirm environment variables are properly set
+- Confirm environment variables are properly set in hosting platform
 
 **Google OAuth Issues**:
-
 - Ensure Google OAuth credentials are properly configured in Google Cloud Console
-- Verify that authorized redirect URIs include your Cognito domain
+- Verify that authorized redirect URIs include your Cognito domain: `https://your-domain.auth.region.amazoncognito.com/oauth2/idpresponse`
 - Check that Google identity provider is properly configured in AWS Cognito
 - Confirm attribute mapping between Google and Cognito user attributes
+- For sandbox testing, ensure secrets are set: `npx ampx sandbox secret set GOOGLE_CLIENT_ID`
 
 ### Build Issues
 

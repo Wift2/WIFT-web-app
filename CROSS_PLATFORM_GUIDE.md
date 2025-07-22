@@ -8,8 +8,8 @@ This guide helps you set up and develop the WIFT AI Web App across different ope
 1. **Prerequisites**: Node.js 18+ and npm
 2. **Clone the repository** and navigate to the project directory
 3. **Run the setup script** for your platform (see below)
-4. **Edit `.env.local`** with your AWS Cognito settings
-5. **Start development**: `npm run dev`
+4. **Start development**: `npm run dev` (works immediately with mock authentication)
+5. **Optional**: Set up real AWS authentication for testing (see Authentication Testing section)
 
 ## Platform-Specific Setup
 
@@ -22,8 +22,8 @@ setup.bat
 
 # Or manually:
 npm install
-copy .env.example .env.local
 npm run setup
+npm run dev  # Starts immediately with mock authentication
 ```
 
 #### Option 2: Windows Subsystem for Linux (WSL)
@@ -34,8 +34,8 @@ chmod +x setup.sh
 
 # Or manually:
 npm install
-cp .env.example .env.local
 npm run setup
+npm run dev  # Starts immediately with mock authentication
 ```
 
 ### macOS
@@ -47,8 +47,8 @@ chmod +x setup.sh
 
 # Or manually:
 npm install
-cp .env.example .env.local
 npm run setup
+npm run dev  # Starts immediately with mock authentication
 ```
 
 ### Linux (Ubuntu/Debian/Fedora/etc.)
@@ -60,8 +60,8 @@ chmod +x setup.sh
 
 # Or manually:
 npm install
-cp .env.example .env.local
 npm run setup
+npm run dev  # Starts immediately with mock authentication
 ```
 
 ## Development Workflow
@@ -81,14 +81,24 @@ VITE_PORT=3000 npm run dev
 
 ### Environment Variables
 
-The project uses environment variables for configuration. Copy `.env.example` to `.env.local` and customize:
+The project uses environment variables for configuration, but **setup is optional for development**.
 
-#### Development Mode (No AWS Setup Required)
-```env
-VITE_DEV_MODE=true
+#### Development Mode (Default - No Setup Required)
+The app automatically runs in development mode with mock authentication when no AWS configuration is detected. No `.env.local` file is needed.
+
+#### Testing Real Authentication (Optional)
+For testing real AWS Cognito authentication, you have two options:
+
+**Option 1: Amplify Sandbox (Recommended)**
+```bash
+# Start temporary AWS backend
+npm run amplify:sandbox
+# No .env.local needed - amplify_outputs.json is auto-generated
 ```
 
-#### Production Mode (AWS Cognito Required)
+**Option 2: Manual AWS Configuration**
+Create `.env.local` with your AWS settings:
+
 ```env
 VITE_DEV_MODE=false
 VITE_AWS_USER_POOL_ID=us-east-1_XXXXXXXXX
@@ -115,6 +125,11 @@ npm run format:check     # Check formatting
 npm run fix:line-endings # Fix cross-platform line ending issues
 npm run type-check       # TypeScript type checking
 
+# AWS Amplify Backend
+npm run amplify:sandbox  # Start temporary AWS backend for testing
+npm run amplify:generate # Generate types from backend schema
+npm run amplify:deploy   # Deploy backend to AWS
+
 # Testing
 npm run test             # Run tests
 npm run test:ui          # Run tests with UI
@@ -126,6 +141,30 @@ npm run clean:install    # Clean and reinstall dependencies
 npm run setup            # Initial project setup
 npm run setup:dev        # Setup and start development
 ```
+
+## Authentication Testing
+
+### Immediate Development (No AWS Setup)
+```bash
+npm run dev
+```
+The app automatically runs with mock authentication - perfect for UI development and testing.
+
+### Real Authentication Testing
+
+#### Option 1: Amplify Sandbox (Recommended)
+```bash
+# Terminal 1: Start temporary AWS backend
+npm run amplify:sandbox
+
+# Terminal 2: Start development server
+npm run dev
+```
+
+#### Option 2: Manual AWS Setup
+1. Create `.env.local` with AWS credentials
+2. Set `VITE_DEV_MODE=false`
+3. Run `npm run dev`
 
 ## Platform-Specific Considerations
 
