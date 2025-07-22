@@ -74,18 +74,20 @@ const CreateFloorplanDialog = ({
   };
 
   const isSquareFootageFormValid = () => {
-    return (
+    const isValid =
       squareFootageForm.length.length > 0 &&
       squareFootageForm.width.length > 0 &&
-      squareFootageForm.height.length > 0
-    );
+      squareFootageForm.height.length > 0;
+    return isValid;
   };
 
   const isAttendeesFormValid = () => {
-    return (
-      attendeesForm.attendees.length > 0 &&
-      Number.parseInt(attendeesForm.attendees) > 0
-    );
+    const hasAttendeesValue = attendeesForm.attendees.length > 0;
+    const attendeesNumber = Number(attendeesForm.attendees);
+    const isValidNumber = !Number.isNaN(attendeesNumber) && attendeesNumber > 0;
+    const isValid = hasAttendeesValue && isValidNumber;
+    
+    return isValid;
   };
 
   const handleGenerateFloorplan = () => {
