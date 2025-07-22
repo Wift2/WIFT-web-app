@@ -115,6 +115,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           justifyContent: 'center',
           alignItems: 'center',
           minHeight: '100vh',
+          backgroundColor: '#f5f5f5',
         }}
       >
         <AmplifyThemeProvider theme={materialUITheme}>
