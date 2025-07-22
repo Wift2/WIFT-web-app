@@ -4,7 +4,7 @@ import GradientTitle from '../../components/GradientTitle';
 const SettingsPage = () => {
   return (
     <Box sx={{ p: 3 }}>
-      <GradientTitle variant="h2" component="h1" gutterBottom>
+      <GradientTitle variant="h4" component="h1" gutterBottom>
         Settings
       </GradientTitle>
       <Paper sx={{ p: 3 }}>

@@ -81,7 +81,7 @@ const DashboardPage = () => {
         </Stack>
 
         {/* Recent Activity */}
-        <Paper sx={{ p: 3 }}>
+        <Box sx={{ p: 3 }}>
           <Typography variant="h6" gutterBottom>
             Recent Activity
           </Typography>
@@ -109,7 +109,7 @@ const DashboardPage = () => {
               </Typography>
             </Box>
           </Stack>
-        </Paper>
+        </Box>
       </Stack>
     </Box>
   );

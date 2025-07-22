@@ -1,21 +1,26 @@
 # WIFT - Custom Floorplan Creator
 
-A modern web application for creating and ma│   └── Settings/
-│       └── SettingsPage.tsx  # User settings and preferences
-│   └── utils/
-│       └── helpers.ts        # Utility functionstom floorplans. Built with React, TypeScript, and Material-UI, featuring AWS Cognito authentication with Google OAuth support and advanced theming capabilities.
+A modern web application for creating and ma│ │ └── Settings/
+│ │ └── SettingsPage.tsx # User settings and preferences
+│ ├── themes/ # WIFT theme system
+│ │ ├── wift/
+│ │ │ └── index.ts # WIFT brand theme implementation
+│ │ └── index.ts # Theme registry and utilities
+│ └── utils/
+│ └── helpers.ts # Utility functionstom floorplans. Built with React, TypeScript, and Material-UI, featuring AWS Cognito authentication with Google OAuth support and advanced theming capabilities.
 
 ## Features
 
 - **Custom Floorplan Creation**: Intuitive interface for designing custom floorplans
-- **Professional Templates**: Pre-built templates for residential and commercial properties  
+- **Professional Templates**: Pre-built templates for residential and commercial properties
 - **Drag & Drop Designer**: Easy-to-use design tools (coming soon)
 - **3D Visualization**: View your floorplans in 3D (coming soon)
 - **Collaboration Tools**: Share and collaborate on designs (coming soon)
 - **Export Options**: Multiple format support for your designs (coming soon)
 - **AWS Cognito Authentication**: Secure user authentication with Google OAuth support
+- **WIFT Theme System**: Custom brand theme with light and dark mode variants
 - **Responsive Design**: Mobile-first responsive design optimized for all devices
-- **Professional Navigation**: Clean sidebar navigation with integrated controls
+- **Professional Navigation**: Clean sidebar navigation with integrated theme controls
 - **Code Quality**: Comprehensive ESLint, Prettier, and Unicorn plugin setup
 - **Testing**: Vitest and React Testing Library integration
 - **Hot Module Replacement**: Fast development with Vite
@@ -25,17 +30,20 @@ A modern web application for creating and ma│   └── Settings/
 ### Cross-Platform Setup
 
 **Windows:**
+
 ```cmd
 setup.bat
 ```
 
 **macOS/Linux:**
+
 ```bash
 chmod +x setup.sh
 ./setup.sh
 ```
 
 **Manual Setup (All Platforms):**
+
 ```bash
 npm install
 cp .env.example .env.local  # Copy environment template
@@ -49,7 +57,9 @@ npm run dev                 # Start development server
 
 - **React 19** - Latest React with modern hooks and Strict Mode
 - **TypeScript 5.8** - Type-safe development with strict configuration
-- **Material UI 7.2** - Complete design system with advanced capabilities
+- **Material UI Toolpad Core 0.16** - Professional dashboard framework with integrated theming
+- **Material UI 7.2** - Complete design system with advanced theming capabilities
+- **WIFT Theme System** - Custom brand implementation optimized for the platform
 - **Roboto Font** - Google's Material Design font for consistent typography
 - **AWS Amplify 6.15** - AWS Cognito authentication integration
 - **Vite 7.0** - Lightning-fast build tool and development server
@@ -68,8 +78,9 @@ npm run dev                 # Start development server
 │   │   ├── AuthProvider.tsx  # Authentication context with dev mode
 │   │   └── auth-theme.ts     # AWS Amplify Authenticator theme
 │   ├── components/
-│   │   ├── DashboardLayout.tsx      # Main dashboard layout
-│   │   └── DashboardLayoutDemo.tsx  # Router and page management
+│   │   ├── DashboardLayout.tsx      # Toolpad Core layout with theme integration
+│   │   ├── DashboardLayoutDemo.tsx  # Router and page management
+│   │   └── ThemeSelector.tsx        # Theme switcher component
 │   ├── config/
 │   │   └── aws-config.ts     # AWS Cognito configuration
 │   ├── hooks/
@@ -84,11 +95,14 @@ npm run dev                 # Start development server
 │   │   │   └── components/       # Floorplan-specific components
 │   │   └── Settings/
 │   │       └── SettingsPage.tsx  # User settings and preferences
-│   ├── themes/              # Multi-theme system
-│   │   ├── apple/
-│   │   │   └── index.ts     # Apple Design System implementation
-│   │   ├── mui/
-│   │   │   └── index.ts     # Material Design theme
+│   ├── themes/              # WIFT theme system
+│   │   ├── base/
+│   │   │   └── index.ts     # Base theme components shared across themes
+│   │   ├── wift/
+│   │   │   └── index.ts     # WIFT brand theme implementation
+│   │   └── index.ts         # Theme registry and utilities
+│   │   ├── wift/
+│   │   │   └── index.ts     # WIFT brand theme implementation
 │   │   └── index.ts         # Theme registry and utilities
 │   └── utils/
 │       └── helpers.ts        # Utility functions
@@ -135,8 +149,9 @@ For production deployment with real AWS Cognito authentication:
    - Map Google attributes to Cognito user pool attributes (email, name, etc.)
 
 3. **Environment Configuration**
-   
+
    Create `.env.local` with your AWS settings:
+
    ```env
    VITE_AWS_USER_POOL_ID=us-east-1_XXXXXXXXX
    VITE_AWS_USER_POOL_CLIENT_ID=xxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -147,7 +162,7 @@ For production deployment with real AWS Cognito authentication:
 
 ### Available Scripts
 
-```bash
+````bash
 # Development
 npm run dev          # Start development server with HMR
 
@@ -184,7 +199,7 @@ npm run clean            # Clean build artifacts
 npm run clean:install    # Clean and reinstall dependencies
 npm run setup            # Initial project setup
 npm run setup:dev        # Setup and start development
-```
+````
 
 ## Application Features
 
@@ -193,21 +208,24 @@ npm run setup:dev        # Setup and start development
 - **Development Mode**: Automatic mock authentication for local development
 - **Production Mode**: Full AWS Cognito integration with OAuth flow
 - **Google OAuth**: One-click sign-in with Google accounts via Cognito federation
+- **Custom Theming**: WIFT-styled Authenticator with brand colors and consistent design
 - **User Management**: Secure sign-in/sign-out with user context
 - **Protected Routes**: Authentication-gated dashboard access
 
 ### Dashboard Pages
 
 - **Dashboard** - Overview with metrics cards, charts, and activity feeds
-- **Floorplans** - Building layouts and property floorplan management  
+- **Floorplans** - Building layouts and property floorplan management
 - **Settings** - User preferences and application configuration
 
 ### Material-UI Integration
 
-- **Professional Layout**: Dashboard layout with responsive navigation
+- **Toolpad Core**: Professional dashboard layout with responsive navigation
+- **WIFT Theme Support**: Custom WIFT brand theme with light and dark mode variants
 - **Roboto Typography**: Google's Material Design font with full weight variants (300, 400, 500, 700)
 - **Component Library**: Full Material-UI v7 component ecosystem
 - **Responsive Design**: Mobile-first approach with breakpoint management
+- **Theme System**: Ready for expansion with additional themes in the future
 
 ## Development Workflow
 
@@ -225,7 +243,8 @@ The project enforces high code quality with:
 1. **New Pages**: Create components in `src/pages/` and add routes to `DashboardLayoutDemo.tsx`
 2. **Navigation**: Update `NAVIGATION` array in `DashboardLayout.tsx`
 3. **Authentication**: Use `useAuth()` hook for user state and actions
-4. **Styling**: Follow Material-UI patterns with sx props and theme usage
+4. **Theming**: Use WIFT theme context for consistent brand design
+5. **Theme Expansion**: Add new themes in `src/themes/` and register in the theme system when needed
 
 ## Production Deployment
 
@@ -242,6 +261,7 @@ npm run amplify:sandbox
 ```
 
 **Features:**
+
 - **One-Click Deploy**: Connect Git repo for automatic deployments
 - **Backend Integration**: AWS Cognito authentication pre-configured
 - **Global CDN**: Automatic SSL and worldwide distribution
@@ -294,17 +314,20 @@ npm run preview
 ### Common Development Issues
 
 **Port Conflicts**: Vite automatically finds available ports (usually 5173+)
+
 ```bash
 # Force specific port
 npm run dev -- --port 3000
 ```
 
 **TypeScript Errors**: Run type checking to identify issues
+
 ```bash
 npm run type-check
 ```
 
 **ESLint Issues**: Auto-fix most formatting and style issues
+
 ```bash
 npm run lint
 ```
@@ -313,12 +336,14 @@ npm run lint
 
 **Development Mode**: Ensure no `.env.local` file exists for mock authentication
 
-**Production Mode**: 
+**Production Mode**:
+
 - Verify AWS credentials and User Pool configuration
 - Check redirect URLs match your deployed domain
 - Confirm environment variables are properly set
 
 **Google OAuth Issues**:
+
 - Ensure Google OAuth credentials are properly configured in Google Cloud Console
 - Verify that authorized redirect URIs include your Cognito domain
 - Check that Google identity provider is properly configured in AWS Cognito
@@ -327,12 +352,14 @@ npm run lint
 ### Build Issues
 
 **Dependency Conflicts**: Clear and reinstall dependencies
+
 ```bash
 rm -rf node_modules package-lock.json
 npm install
 ```
 
 **Memory Issues**: Increase Node.js memory limit
+
 ```bash
 export NODE_OPTIONS="--max-old-space-size=4096"
 npm run build

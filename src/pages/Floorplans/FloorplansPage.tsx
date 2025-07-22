@@ -66,7 +66,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                 alignItems: 'center',
               }}
             >
-              <GradientTitle variant="h2" component="h1">
+              <GradientTitle variant="h4" component="h1">
                 Custom Floorplans
               </GradientTitle>
               <Button
@@ -420,7 +420,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                 ) : (
                   <>
                     <Typography variant="h6" gutterBottom>
-                      Coming Soon Features
+                      Features Coming Soon
                     </Typography>
                     <Grid container spacing={2}>
                       <Grid size={{ xs: 12, sm: 6, md: 3 }}>
@@ -440,7 +440,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                       </Grid>
                       <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                         <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                          • Export Options
+                          • Sharing Options
                         </Typography>
                       </Grid>
                     </Grid>

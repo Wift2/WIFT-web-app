@@ -1,0 +1,92 @@
+/* Global CSS overrides for Toolpad AppBar and Drawer border radius */
+
+/* CSS Custom Properties Override */
+:root {
+  --mui-appbar-border-radius: 0 !important;
+  --mui-drawer-border-radius: 0 !important;
+}
+
+/* Target all AppBar components with maximum specificity */
+.MuiAppBar-root,
+.MuiAppBar-root.MuiAppBar-root,
+[class*="MuiAppBar-root"],
+div.MuiAppBar-root,
+header.MuiAppBar-root {
+  border-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  --border-radius: 0 !important;
+}
+
+/* Target all Drawer paper components with maximum specificity */
+.MuiDrawer-paper,
+.MuiDrawer-paper.MuiDrawer-paper,
+[class*="MuiDrawer-paper"],
+div.MuiDrawer-paper,
+nav.MuiDrawer-paper {
+  border-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  --border-radius: 0 !important;
+}
+
+/* Target Toolpad specific elements and common patterns */
+[data-testid*="AppBar"],
+[data-testid*="Navigation"],
+[class*="toolpad"] .MuiAppBar-root,
+[class*="toolpad"] .MuiDrawer-paper,
+[class*="Toolpad"] .MuiAppBar-root,
+[class*="Toolpad"] .MuiDrawer-paper,
+[class*="dashboard"] .MuiAppBar-root,
+[class*="dashboard"] .MuiDrawer-paper,
+[class*="app-bar"] .MuiAppBar-root,
+[class*="navigation"] .MuiDrawer-paper {
+  border-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* Additional targeting for nested elements */
+header .MuiAppBar-root,
+nav .MuiDrawer-paper,
+[role="banner"] .MuiAppBar-root,
+[role="navigation"] .MuiDrawer-paper,
+[role="complementary"] .MuiDrawer-paper {
+  border-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* Ultra high specificity fallback */
+html body div .MuiAppBar-root,
+html body header .MuiAppBar-root {
+  border-radius: 0 !important;
+}
+
+html body div .MuiDrawer-paper,
+html body nav .MuiDrawer-paper {
+  border-radius: 0 !important;
+}
+
+/* Override any inline styles */
+.MuiAppBar-root[style*="border-radius"],
+.MuiDrawer-paper[style*="border-radius"] {
+  border-radius: 0 !important;
+}
+
+/* Target any potential vendor prefixes */
+.MuiAppBar-root,
+.MuiDrawer-paper {
+  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  -ms-border-radius: 0 !important;
+}

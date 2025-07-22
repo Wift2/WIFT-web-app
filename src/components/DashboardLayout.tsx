@@ -4,7 +4,10 @@ import {
   DashboardLayout,
   type Navigation,
   type Router,
+  Account,
+  ThemeSwitcher,
 } from '@toolpad/core';
+import { Stack } from '@mui/material';
 import { useAuth } from '../hooks/useAuth';
 import {
   Dashboard as DashboardIcon,
@@ -12,6 +15,8 @@ import {
   Map as FloorplansIcon,
 } from '@mui/icons-material';
 import wiftMediumLogo from '../assets/wift-medium.webp';
+import { getTheme, type ThemeNames } from '../themes';
+import ThemeSelector from './ThemeSelector';
 
 // Navigation configuration
 const NAVIGATION: Navigation = [
@@ -57,6 +62,11 @@ interface DemoProps {
 const DashboardLayoutBasic = (props: DemoProps) => {
   const { router } = props;
   const { user, signOut } = useAuth();
+  const [currentTheme, setCurrentTheme] = React.useState<ThemeNames>('wift');
+
+  const handleThemeChange = React.useCallback((themeName: ThemeNames) => {
+    setCurrentTheme(themeName);
+  }, []);
 
   const session = React.useMemo(
     () => ({
@@ -80,6 +90,28 @@ const DashboardLayoutBasic = (props: DemoProps) => {
     };
   }, [signOut]);
 
+  const currentThemeObj = React.useMemo(() => {
+    const lightTheme = getTheme(currentTheme, 'light');
+    const darkTheme = getTheme(currentTheme, 'dark');
+
+    // Default to dark mode for all themes
+    return { light: darkTheme, dark: lightTheme };
+  }, [currentTheme]);
+
+  const toolbarActions = React.useMemo(
+    () => (
+      <Stack direction="row" spacing={1} alignItems="center">
+        <ThemeSelector
+          currentTheme={currentTheme}
+          onThemeChange={handleThemeChange}
+        />
+        <ThemeSwitcher />
+        <Account />
+      </Stack>
+    ),
+    [currentTheme, handleThemeChange]
+  );
+
   return (
     <AppProvider
       session={session}
@@ -87,8 +119,15 @@ const DashboardLayoutBasic = (props: DemoProps) => {
       navigation={NAVIGATION}
       branding={BRANDING}
       router={router}
+      theme={currentThemeObj}
     >
-      <DashboardLayout>{props.children}</DashboardLayout>
+      <DashboardLayout
+        slots={{
+          toolbarActions: () => toolbarActions,
+        }}
+      >
+        {props.children}
+      </DashboardLayout>
     </AppProvider>
   );
 };
