@@ -140,7 +140,7 @@ const FloorplansPage = ({ router }: FloorplansPageProps) => {
                     content: '""',
                     display: 'block',
                     width: '510px',
-                    height: '110px',
+                    height: '58px',
                     position: 'absolute',
                     zIndex: 0,
                     transform: 'translate(80%, 28%)',
