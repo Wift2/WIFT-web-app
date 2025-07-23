@@ -7,14 +7,18 @@ import {
   Account,
   ThemeSwitcher,
 } from '@toolpad/core';
-import { Stack } from '@mui/material';
+import { Stack, Typography, Box } from '@mui/material';
 import { useAuth } from '../hooks/useAuth';
+import { useSidebar } from '../hooks/useSidebar';
+import { SidebarProvider } from '../contexts/SidebarContext';
 import {
   Dashboard as DashboardIcon,
   Settings as SettingsIcon,
   Map as FloorplansIcon,
+  LocationOn as VenueIcon,
 } from '@mui/icons-material';
 import wiftMediumLogo from '../assets/wift-medium.webp';
+import wiftLogo from '../assets/wift-logo.png';
 import { getTheme, type ThemeNames } from '../themes';
 import ThemeSelector from './ThemeSelector';
 
@@ -35,6 +39,11 @@ const NAVIGATION: Navigation = [
     icon: <FloorplansIcon />,
   },
   {
+    segment: 'venues',
+    title: 'Venues',
+    icon: <VenueIcon />,
+  },
+  {
     kind: 'divider',
   },
   {
@@ -49,7 +58,14 @@ const NAVIGATION: Navigation = [
 ];
 
 const BRANDING = {
-  title: 'WIFT',
+  title: (
+    <Typography
+      variant="h6"
+      sx={{ fontSize: '1.5rem', ml: -1, letterSpacing: '2.0075px' }}
+    >
+      IFT
+    </Typography>
+  ),
   logo: <img src={wiftMediumLogo} alt="WIFT AI" style={{ height: 40 }} />,
 };
 
@@ -58,6 +74,49 @@ interface DemoProps {
   router: Router;
   children: React.ReactNode;
 }
+
+// Sidebar Footer Component that tracks mini state
+const SidebarFooter = ({ mini }: { mini?: boolean }) => {
+  const { setIsMini } = useSidebar();
+
+  React.useEffect(() => {
+    setIsMini(!!mini);
+  }, [mini, setIsMini]);
+
+  return (
+    <Box sx={{ p: mini ? 0 : 2, textAlign: 'center' }}>
+      <Box sx={{ mb: 1, display: 'flex', justifyContent: 'center' }}>
+        <img
+          src={wiftLogo}
+          alt="WIFT Logo"
+          style={{
+            height: '32px',
+            width: 'auto',
+            marginLeft: mini ? '14px' : '0px',
+          }}
+        />
+      </Box>
+      {!mini && (
+        <Typography variant="caption" color="text.secondary">
+          Copyright © 2025 WIFT, Inc. - All Rights Reserved.
+        </Typography>
+      )}
+      {mini && (
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{
+            display: 'block',
+            textAlign: 'center',
+            marginLeft: '14px',
+          }}
+        >
+          © WIFT
+        </Typography>
+      )}
+    </Box>
+  );
+};
 
 const DashboardLayoutBasic = (props: DemoProps) => {
   const { router } = props;
@@ -112,6 +171,8 @@ const DashboardLayoutBasic = (props: DemoProps) => {
     [currentTheme, handleThemeChange]
   );
 
+  const sidebarFooter = React.useMemo(() => SidebarFooter, []);
+
   return (
     <AppProvider
       session={session}
@@ -124,6 +185,7 @@ const DashboardLayoutBasic = (props: DemoProps) => {
       <DashboardLayout
         slots={{
           toolbarActions: () => toolbarActions,
+          sidebarFooter,
         }}
       >
         {props.children}
@@ -132,4 +194,13 @@ const DashboardLayoutBasic = (props: DemoProps) => {
   );
 };
 
-export default DashboardLayoutBasic;
+// Main export that wraps with SidebarProvider
+const DashboardLayoutWithSidebar = (props: DemoProps) => {
+  return (
+    <SidebarProvider>
+      <DashboardLayoutBasic {...props} />
+    </SidebarProvider>
+  );
+};
+
+export default DashboardLayoutWithSidebar;

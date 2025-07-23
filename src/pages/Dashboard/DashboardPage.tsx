@@ -1,11 +1,4 @@
-import {
-  Typography,
-  Box,
-  Card,
-  CardContent,
-  Paper,
-  Stack,
-} from '@mui/material';
+import { Typography, Box, Card, CardContent, Stack } from '@mui/material';
 import { useAuth } from '../../hooks/useAuth';
 import GradientTitle from '../../components/GradientTitle';
 

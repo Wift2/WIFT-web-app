@@ -86,7 +86,7 @@ const CreateFloorplanDialog = ({
     const attendeesNumber = Number(attendeesForm.attendees);
     const isValidNumber = !Number.isNaN(attendeesNumber) && attendeesNumber > 0;
     const isValid = hasAttendeesValue && isValidNumber;
-    
+
     return isValid;
   };
 

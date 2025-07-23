@@ -9,7 +9,7 @@
 /* Target all AppBar components with maximum specificity */
 .MuiAppBar-root,
 .MuiAppBar-root.MuiAppBar-root,
-[class*="MuiAppBar-root"],
+[class*='MuiAppBar-root'],
 div.MuiAppBar-root,
 header.MuiAppBar-root {
   border-radius: 0 !important;
@@ -23,7 +23,7 @@ header.MuiAppBar-root {
 /* Target all Drawer paper components with maximum specificity */
 .MuiDrawer-paper,
 .MuiDrawer-paper.MuiDrawer-paper,
-[class*="MuiDrawer-paper"],
+[class*='MuiDrawer-paper'],
 div.MuiDrawer-paper,
 nav.MuiDrawer-paper {
   border-radius: 0 !important;
@@ -35,16 +35,16 @@ nav.MuiDrawer-paper {
 }
 
 /* Target Toolpad specific elements and common patterns */
-[data-testid*="AppBar"],
-[data-testid*="Navigation"],
-[class*="toolpad"] .MuiAppBar-root,
-[class*="toolpad"] .MuiDrawer-paper,
-[class*="Toolpad"] .MuiAppBar-root,
-[class*="Toolpad"] .MuiDrawer-paper,
-[class*="dashboard"] .MuiAppBar-root,
-[class*="dashboard"] .MuiDrawer-paper,
-[class*="app-bar"] .MuiAppBar-root,
-[class*="navigation"] .MuiDrawer-paper {
+[data-testid*='AppBar'],
+[data-testid*='Navigation'],
+[class*='toolpad'] .MuiAppBar-root,
+[class*='toolpad'] .MuiDrawer-paper,
+[class*='Toolpad'] .MuiAppBar-root,
+[class*='Toolpad'] .MuiDrawer-paper,
+[class*='dashboard'] .MuiAppBar-root,
+[class*='dashboard'] .MuiDrawer-paper,
+[class*='app-bar'] .MuiAppBar-root,
+[class*='navigation'] .MuiDrawer-paper {
   border-radius: 0 !important;
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
@@ -55,9 +55,9 @@ nav.MuiDrawer-paper {
 /* Additional targeting for nested elements */
 header .MuiAppBar-root,
 nav .MuiDrawer-paper,
-[role="banner"] .MuiAppBar-root,
-[role="navigation"] .MuiDrawer-paper,
-[role="complementary"] .MuiDrawer-paper {
+[role='banner'] .MuiAppBar-root,
+[role='navigation'] .MuiDrawer-paper,
+[role='complementary'] .MuiDrawer-paper {
   border-radius: 0 !important;
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
@@ -77,8 +77,8 @@ html body nav .MuiDrawer-paper {
 }
 
 /* Override any inline styles */
-.MuiAppBar-root[style*="border-radius"],
-.MuiDrawer-paper[style*="border-radius"] {
+.MuiAppBar-root[style*='border-radius'],
+.MuiDrawer-paper[style*='border-radius'] {
   border-radius: 0 !important;
 }
 

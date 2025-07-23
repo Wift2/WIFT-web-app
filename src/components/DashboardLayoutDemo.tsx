@@ -4,6 +4,7 @@ import DashboardLayoutBasic from '../components/DashboardLayout';
 import DashboardPage from '../pages/Dashboard';
 import FloorplansPage from '../pages/Floorplans';
 import CreateFloorplanPage from '../pages/Floorplans/CreateFloorplanPage';
+import { VenuePage } from '../pages/Venues';
 import SettingsPage from '../pages/Settings';
 
 /**
@@ -31,6 +32,9 @@ const PageContent = ({
     }
     case '/floorplans/create': {
       return <CreateFloorplanPage router={router} />;
+    }
+    case '/venues': {
+      return <VenuePage />;
     }
     case '/settings': {
       return <SettingsPage />;

@@ -1,9 +1,12 @@
-# WIFT - Custom Floorplan Creator
+# WIFT - Event Venue & Floorplan Creator
 
-A modern web application for creating and managing custom floorplans. Built with React, TypeScript, and Material-UI, featuring AWS Cognito authentication with Google OAuth support and advanced theming capabilities.
+A modern web application for finding event venues and creating custom floorplans. Built with React, TypeScript, and Material-UI, featuring AWS Cognito authentication with Google OAuth support and advanced theming capabilities.
 
 ## Features
 
+- **Event Venue Search**: Advanced venue discovery with real-time filtering, interactive maps, and location-based search
+- **Real-time Location Services**: ZIP code to city name mapping using live APIs for accurate location information
+- **Interactive Maps**: Leaflet-powered maps with venue markers, search functionality, and responsive design
 - **Custom Floorplan Creation**: Intuitive interface for designing custom floorplans
 - **Professional Templates**: Pre-built templates for residential and commercial properties
 - **Drag & Drop Designer**: Easy-to-use design tools (coming soon)
@@ -55,6 +58,9 @@ npm run dev                 # Start development server (works immediately with m
 - **WIFT Theme System** - Custom brand implementation optimized for the platform
 - **Roboto Font** - Google's Material Design font for consistent typography
 - **AWS Amplify 6.15** - Modern Amplify Gen 2 backend with automatic resource generation
+- **Leaflet Maps** - Interactive maps with venue markers and location search
+- **Real-time APIs** - Zippopotam.us API for ZIP code to city name resolution
+- **Framer Motion** - Smooth animations and transitions for enhanced UX
 - **Vite 7.0** - Lightning-fast build tool and development server
 - **ESLint 9.30 + Unicorn** - Advanced code quality enforcement
 - **Prettier 3.6** - Consistent code formatting
@@ -86,8 +92,15 @@ npm run dev                 # Start development server (works immediately with m
 │   │   ├── Floorplans/
 │   │   │   ├── FloorplansPage.tsx # Floorplans and building layouts
 │   │   │   └── components/       # Floorplan-specific components
-│   │   └── Settings/
-│   │       └── SettingsPage.tsx  # User settings and preferences
+│   │   ├── Settings/
+│   │   │   └── SettingsPage.tsx  # User settings and preferences
+│   │   └── Venues/
+│   │       ├── VenuePage.tsx     # Venue search and discovery
+│   │       ├── components/
+│   │       │   ├── VenueMap.tsx  # Interactive Leaflet map with venue markers
+│   │       │   └── VenueSearch.tsx # Advanced search with filters and real-time API
+│   │       └── services/
+│   │           └── venueService.ts # Venue data management and API integration
 │   ├── themes/              # WIFT theme system
 │   │   ├── base/
 │   │   │   └── index.ts     # Base theme components shared across themes
@@ -245,8 +258,51 @@ npm run setup:dev        # Setup and start development
 ### Dashboard Pages
 
 - **Dashboard** - Overview with metrics cards, charts, and activity feeds
+- **Venues** - Event venue search and discovery with interactive maps, advanced filters, and real-time location services
 - **Floorplans** - Building layouts and property floorplan management
 - **Settings** - User preferences and application configuration
+
+### Venue Search Features
+
+The venue search system provides comprehensive event venue discovery capabilities:
+
+#### Advanced Search & Filtering
+- **ZIP Code Search**: Enter ZIP codes with automatic city name resolution via real-time APIs
+- **Capacity Filtering**: Filter venues by attendee capacity with range sliders
+- **Price Range**: Filter by venue pricing tiers ($, $$, $$$, $$$$)
+- **Venue Types**: Filter by hotel, conference center, meeting room, event space, banquet hall, corporate venue
+- **Amenities**: Filter by WiFi, parking, A/V equipment, catering, accessibility features, and more
+- **Rating Filter**: Minimum star rating requirements with 0.5-star precision
+
+#### Interactive Mapping
+- **Leaflet Integration**: High-performance, responsive maps with full mobile support
+- **Venue Markers**: Clickable markers showing venue details, photos, and contact information
+- **Search Functionality**: Built-in address and venue search with autocomplete
+- **Layer Controls**: Switch between street view and satellite imagery
+- **Location Services**: "Find my location" functionality with GPS integration
+- **Fullscreen Mode**: Expanded map view for detailed venue exploration
+- **Responsive Design**: Map automatically adjusts to sidebar state changes
+
+#### Real-time Location Services
+- **ZIP Code API**: Zippopotam.us integration for accurate ZIP code to city/state resolution
+- **Address Search**: Nominatim OpenStreetMap API for address geocoding and validation
+- **Error Handling**: Graceful fallbacks when location services are unavailable
+- **Offline Support**: Cached venue data ensures functionality without internet
+
+#### User Experience
+- **Smooth Animations**: Framer Motion-powered transitions for venue cards and filters
+- **Sort Options**: Multiple sorting criteria (name, rating, capacity, price, city)
+- **Favorites System**: Save preferred venues for quick access
+- **Share Functionality**: Native sharing or clipboard copy for venue information
+- **No Results Handling**: Entertaining fallback imagery with helpful messaging
+- **Mobile Optimization**: Touch-friendly interface with responsive grid layouts
+
+#### Code Architecture
+- **Arrow Functions**: Modern ES6+ function syntax throughout the codebase
+- **TypeScript Interfaces**: Comprehensive type safety for all venue data and API responses
+- **React Hooks**: Efficient state management with useState, useEffect, and custom hooks
+- **Material-UI Integration**: Consistent design system with theme-aware components
+- **Component Architecture**: Modular, reusable components following React best practices
 
 ### Material-UI Integration
 
@@ -300,9 +356,14 @@ npm run amplify:sandbox
 
 See [AMPLIFY_DEPLOYMENT.md](AMPLIFY_DEPLOYMENT.md) for complete setup instructions.
 
-> 📚 **Additional Guides**: 
+## Documentation
+
+> 📚 **Complete Documentation Suite**: 
 > - [Cross-Platform Development Guide](./CROSS_PLATFORM_GUIDE.md) - Platform-specific setup and troubleshooting
 > - [Routing Implementation Guide](./ROUTING.md) - Custom URL routing with Toolpad Core
+> - [API Integration Guide](./API_INTEGRATION.md) - External APIs, error handling, and security
+> - [Code Style Guide](./CODE_STYLE.md) - Coding standards, patterns, and best practices
+> - [Amplify Deployment Guide](./AMPLIFY_DEPLOYMENT.md) - AWS deployment and backend setup
 
 ### Manual Build Process
 

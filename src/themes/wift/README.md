@@ -19,17 +19,20 @@ The WIFT theme is built on Material-UI's theming system and provides both light 
 ## Color Palette
 
 ### Primary Colors
+
 - **Primary Blue**: `#0369a1` (Main brand color)
 - **Primary Blue Light**: `#0ea5e9` (Hover states, accents)
 - **Primary Blue Dark**: `#075985` (Active states)
 - **Primary Blue Deep**: `#0c4a6e` (Deep accents)
 
 ### Secondary Colors
+
 - **Secondary Green**: `#11b83a` (Secondary brand color)
 - **Secondary Green Light**: `#10B981` (Light accents)
 - **Secondary Green Dark**: `#15803d` (Dark accents)
 
 ### Accent Colors
+
 - **Accent Cyan**: `#06b6d4` (Info states)
 - **Energy Orange**: `#f97316` (Warning states)
 - **Vibrant Teal**: `#14b8a6` (Success states)
@@ -47,23 +50,27 @@ The WIFT theme uses the Roboto font family with a well-defined hierarchy:
 ## Component Styling
 
 ### Buttons
+
 - **Border Radius**: 12px for modern rounded appearance
 - **Gradient Backgrounds**: Blue-to-darker-blue gradients on primary buttons
 - **Hover Effects**: Subtle lift animation with enhanced blue shadows
 - **Typography**: Semi-bold with no text transformation
 
 ### Cards
+
 - **Border Radius**: 16px for distinctive card appearance
 - **Borders**: Light borders with subtle blue-tinted shadows
 - **Hover Effects**: Lift animation with enhanced blue-tinted shadows
 - **Background**: Clean white (light) or dark secondary (dark) backgrounds
 
 ### Navigation
+
 - **Drawer**: Zero border radius for modern, sharp edges
 - **Selected States**: Blue-green gradient backgrounds with left border indicators
 - **Hover Effects**: Subtle blue background tints
 
 ### Form Elements
+
 - **Text Fields**: 12px border radius with blue focus states
 - **Focus Indicators**: Blue glow effects with 2px shadow rings
 - **Validation**: Color-coded borders for different states
@@ -71,13 +78,14 @@ The WIFT theme uses the Roboto font family with a well-defined hierarchy:
 ## Usage Examples
 
 ### Basic Theme Application
+
 ```tsx
 import { ThemeProvider } from '@mui/material/styles';
 import { wiftTheme } from './themes/wift';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  
+
   return (
     <ThemeProvider theme={darkMode ? wiftTheme.dark : wiftTheme.light}>
       {/* Your app content */}
@@ -87,6 +95,7 @@ function App() {
 ```
 
 ### Component Styling
+
 ```tsx
 import { Button, Card, CardContent } from '@mui/material';
 
@@ -127,6 +136,7 @@ The WIFT theme is designed with accessibility in mind:
 ## Customization
 
 ### Extending the Theme
+
 ```tsx
 import { wiftTheme } from './themes/wift';
 import { createTheme } from '@mui/material/styles';
@@ -141,6 +151,7 @@ const customWiftTheme = createTheme({
 ```
 
 ### Component Overrides
+
 ```tsx
 const wiftThemeWithOverrides = createTheme({
   ...wiftTheme.light,

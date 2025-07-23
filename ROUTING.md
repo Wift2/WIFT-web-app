@@ -36,12 +36,16 @@ This document explains the custom real URL routing implementation that replaces 
 ```typescript
 // Navigate to different pages
 router.navigate('/dashboard');
+router.navigate('/venues');
 router.navigate('/floorplans');
 router.navigate('/settings');
 ```
 
 ### Navigation with Parameters
 ```typescript
+// Venue search examples
+router.navigate('/venues?zipcode=20001&attendees=100&radius=25');
+
 // Form data example
 router.navigate('/floorplans/create?type=squareFootage&length=50&width=30&height=12');
 
@@ -53,12 +57,20 @@ router.navigate('/floorplans/create?type=attendees&attendees=100&screenType=LED'
 ```typescript
 // In your component
 function MyComponent({ router }: { router: Router }) {
-  const formType = router.searchParams.get('type');
+  // Venue search parameters
+  const zipcode = router.searchParams.get('zipcode');
   const attendees = router.searchParams.get('attendees');
+  const radius = router.searchParams.get('radius');
+  
+  // Floorplan parameters
+  const formType = router.searchParams.get('type');
   const screenType = router.searchParams.get('screenType');
   
   // Use parameters to initialize state
   useEffect(() => {
+    if (zipcode && attendees) {
+      setSearchParams({ zipcode, attendees: parseInt(attendees), radius: parseInt(radius || '25') });
+    }
     if (formType === 'attendees' && attendees) {
       setAttendeeCount(parseInt(attendees));
     }
@@ -143,8 +155,13 @@ router.navigate(`/floorplans/create?${newParams.toString()}`);
 # Basic pages
 http://localhost:5173/
 http://localhost:5173/dashboard
+http://localhost:5173/venues
 http://localhost:5173/floorplans
 http://localhost:5173/settings
+
+# Venue search with parameters
+http://localhost:5173/venues?zipcode=20001&attendees=100&radius=25
+http://localhost:5173/venues?zipcode=10001&attendees=50&radius=10
 
 # Floorplan creation with parameters
 http://localhost:5173/floorplans/create?type=squareFootage&length=50&width=30&height=12&screenType=Front&seatingType=Full&tableSize=60&tableSeats=6
